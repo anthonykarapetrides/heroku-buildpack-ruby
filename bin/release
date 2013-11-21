@@ -5,8 +5,4 @@ require 'pathname'
 release = Pathname.new(ARGV.first).join("tmp/heroku-buildpack-release-step.yml")
 puts release.read if release.exist?
 
-cat <<EOF
----
-config_vars:
-  PATH: $PATH:/app/vendor/gs/bin
-EOF
+ENV["PATH"] = "/app/vendor/gs/bin:" + ENV["PATH"]
